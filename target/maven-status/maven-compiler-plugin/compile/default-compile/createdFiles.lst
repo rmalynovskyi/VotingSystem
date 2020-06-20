@@ -1,0 +1,4 @@
+javaops\votingsystem\model\Restaurant.class
+javaops\votingsystem\model\User.class
+javaops\votingsystem\repository\CrudRestaurantRepository.class
+javaops\votingsystem\model\Dish.class
