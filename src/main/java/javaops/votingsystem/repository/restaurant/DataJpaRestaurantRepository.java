@@ -32,7 +32,7 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     public Restaurant getWithMenus(int id) {
-        return null;
+        return crudRestaurantRepository.getWithMenus(id);
     }
 
     @Override

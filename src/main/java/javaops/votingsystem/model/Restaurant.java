@@ -1,32 +1,25 @@
 package javaops.votingsystem.model;
 
-import javaops.votingsystem.HasId;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-public class Restaurant implements HasId {
-    @Id
-    private Integer id;
+@Table(name = "restaurants")
+public class Restaurant extends AbstractBaseEntity {
+
+    @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(min = 2, max = 100)
     private String name;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @OrderBy(value = "localDate DESC")
     private List<Menu> menus;
 
     public Restaurant() {
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
 
     public String getName() {
         return name;

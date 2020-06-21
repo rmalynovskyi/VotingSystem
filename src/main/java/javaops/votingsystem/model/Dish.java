@@ -1,28 +1,34 @@
 package javaops.votingsystem.model;
 
-import javaops.votingsystem.HasId;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-public class Dish implements HasId {
-    @Id
-    private Integer id;
+@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"menu_Id", "name"},
+        name = "dishes_unique_menu_name_idx")})
+public class Dish extends AbstractBaseEntity {
+
+    @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(min = 2, max = 100)
     private String name;
+
+    @Column(name = "price", nullable = false)
+    @NotNull
     private Integer price;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id",nullable = false)
+    @JoinColumn(name = "menu_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
     private Menu menu;
 
     public Dish() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
