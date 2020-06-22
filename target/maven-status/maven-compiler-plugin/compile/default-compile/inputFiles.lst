@@ -1,4 +1,15 @@
-C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\repository\CrudRestaurantRepository.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\HasId.java
 C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\model\Restaurant.java
-C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\model\User.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\repository\RestaurantRepository.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\repository\menu\DataJpaMenuRepository.java
 C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\model\Dish.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\repository\restaurant\DataJpaRestaurantRepository.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\model\AbstractBaseEntity.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\web\DishController.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\repository\dish\CrudDishRepository.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\repository\restaurant\CrudRestaurantRepository.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\repository\DishRepository.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\model\Menu.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\repository\dish\DataJpaDishRepository.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\repository\menu\CrudMenuRepository.java
+C:\VotingSystem\votingsystem\src\main\java\javaops\votingsystem\repository\MenuRepository.java

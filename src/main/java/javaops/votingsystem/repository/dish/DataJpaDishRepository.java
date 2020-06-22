@@ -4,11 +4,13 @@ import javaops.votingsystem.model.Dish;
 import javaops.votingsystem.repository.DishRepository;
 import javaops.votingsystem.repository.menu.CrudMenuRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
 public class DataJpaDishRepository implements DishRepository {
+
     private final CrudDishRepository crudDishRepository;
     private final CrudMenuRepository crudMenuRepository;
 
@@ -18,6 +20,7 @@ public class DataJpaDishRepository implements DishRepository {
     }
 
     @Override
+    @Transactional
     public Dish save(Dish dish, int menuId) {
         if (!dish.isNew() && get(dish.getId(), menuId) == null) {
             return null;

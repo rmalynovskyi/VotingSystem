@@ -1,4 +1,15 @@
+javaops\votingsystem\repository\DishRepository.class
+javaops\votingsystem\model\Menu.class
+javaops\votingsystem\repository\dish\DataJpaDishRepository.class
+javaops\votingsystem\repository\restaurant\CrudRestaurantRepository.class
+javaops\votingsystem\repository\menu\CrudMenuRepository.class
+javaops\votingsystem\repository\RestaurantRepository.class
+javaops\votingsystem\model\AbstractBaseEntity.class
 javaops\votingsystem\model\Restaurant.class
-javaops\votingsystem\model\User.class
-javaops\votingsystem\repository\CrudRestaurantRepository.class
 javaops\votingsystem\model\Dish.class
+javaops\votingsystem\web\DishController.class
+javaops\votingsystem\repository\dish\CrudDishRepository.class
+javaops\votingsystem\repository\restaurant\DataJpaRestaurantRepository.class
+javaops\votingsystem\repository\menu\DataJpaMenuRepository.class
+javaops\votingsystem\HasId.class
+javaops\votingsystem\repository\MenuRepository.class
