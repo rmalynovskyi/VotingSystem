@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = DishController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class DishController {
-    static final String REST_URL = "/menus/{menuId}/dishes";
+    static final String REST_URL = "**/menus/{menuId}/dishes";
     private final DishRepository dishRepository;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -43,7 +43,7 @@ public class DishController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Dish dish, @PathVariable int menuId) {
+    public void update(@RequestBody Dish dish, @PathVariable int menuId, @PathVariable int id) {
         dishRepository.save(dish, menuId);
     }
 
@@ -52,7 +52,7 @@ public class DishController {
         Dish created = dishRepository.save(dish, menuId);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
-                .buildAndExpand(created.getId()).toUri();
+                .buildAndExpand(menuId, created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 }

@@ -4,6 +4,7 @@ import javaops.votingsystem.model.Menu;
 import javaops.votingsystem.repository.MenuRepository;
 import javaops.votingsystem.repository.restaurant.CrudRestaurantRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class DataJpaMenuRepository implements MenuRepository {
     }
 
     @Override
+    @Transactional
     public Menu save(Menu menu, int restaurantId) {
         if (!menu.isNew() && get(menu.getId(), restaurantId) == null) {
             return null;

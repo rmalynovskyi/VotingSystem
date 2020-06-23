@@ -1,5 +1,6 @@
 package javaops.votingsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import javaops.votingsystem.HasId;
 import org.hibernate.Hibernate;
 

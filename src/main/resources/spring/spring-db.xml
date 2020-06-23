@@ -9,8 +9,7 @@
  http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:component-scan base-package="javaops.votingsystem.repository"/>
-    <jpa:repositories base-package="javaops.votingsystem.repository"/>
-    <tx:annotation-driven/>
+    <jpa:repositories base-package="javaops.votingsystem.repository.*"/>
     <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -19,10 +18,12 @@
           p:username="${database.username}"
           p:password="${database.password}"/>
 
-    <bean id="transactionManager"
+   <!-- <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
+    </bean>-->
+
+    <tx:annotation-driven/>
 
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
         <jdbc:script location="${jdbc.initLocation}"/>
@@ -44,4 +45,8 @@
             </bean>
         </property>
     </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManagerFactory"/>
+
 </beans>
