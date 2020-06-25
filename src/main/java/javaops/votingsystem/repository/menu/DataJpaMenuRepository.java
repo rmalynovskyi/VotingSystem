@@ -6,6 +6,7 @@ import javaops.votingsystem.repository.restaurant.CrudRestaurantRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -37,6 +38,11 @@ public class DataJpaMenuRepository implements MenuRepository {
     @Override
     public Menu get(int id, int restaurantId) {
         return crudMenuRepository.findById(id).filter(menu -> menu.getRestaurant().getId() == restaurantId).orElse(null);
+    }
+
+    @Override
+    public Menu getWithDishesByDate(LocalDate localDate, int restaurantId) {
+        return crudMenuRepository.getMenuByLocalDateAndRestaurantId(localDate, restaurantId);
     }
 
     @Override

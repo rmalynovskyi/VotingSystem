@@ -13,6 +13,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+import static javaops.votingsystem.util.ValidationUtil.*;
+
 @RestController
 @RequestMapping(value = RestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestaurantController {
@@ -27,12 +29,12 @@ public class RestaurantController {
 
     @GetMapping("/{id}")
     public Restaurant get(@PathVariable int id) {
-        return restaurantRepository.get(id);
+        return checkNotFoundWithId(restaurantRepository.get(id), id);
     }
 
-    @GetMapping("/{id}/withMenus")
+    @GetMapping("/{id}/with")
     public Restaurant getWithMenus(@PathVariable int id) {
-        return restaurantRepository.getWithMenus(id);
+        return checkNotFoundWithId(restaurantRepository.getWithMenus(id), id);
     }
 
     @GetMapping
@@ -48,17 +50,19 @@ public class RestaurantController {
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
-        restaurantRepository.delete(id);
+        checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody Restaurant restaurant, @PathVariable int id) {
-        restaurantRepository.save(restaurant);
+        assureIdConsistent(restaurant, id);
+        checkNotFound(restaurantRepository.save(restaurant), "id " + id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Restaurant> createWithLocation(@RequestBody Restaurant restaurant) {
+        checkNew(restaurant);
         Restaurant created = restaurantRepository.save(restaurant);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")

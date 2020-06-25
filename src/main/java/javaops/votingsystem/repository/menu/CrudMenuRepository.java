@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -25,5 +26,8 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
 
     @Query("SELECT distinct m FROM Menu m left join fetch m.dishes WHERE m.restaurant.id=:restaurantId ORDER BY m.localDate DESC")
     List<Menu> getAllWithDishes(@Param("restaurantId") int restaurantId);
+
+    @Query("SELECT m FROM Menu m left join fetch m.dishes WHERE m.localDate=:localDate and m.restaurant.id=:restaurantId")
+    Menu getMenuByLocalDateAndRestaurantId(@Param("localDate") LocalDate localDate, @Param("restaurantId") int restaurantId);
 
 }

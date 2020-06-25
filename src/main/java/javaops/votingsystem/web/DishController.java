@@ -13,6 +13,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+import static javaops.votingsystem.util.ValidationUtil.*;
+
 @RestController
 @RequestMapping(value = DishController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class DishController {
@@ -27,13 +29,13 @@ public class DishController {
     @GetMapping("/{id}")
     public Dish get(@PathVariable int menuId, @PathVariable int id) {
         log.info("get dish {} for menu {}", id, menuId);
-        return dishRepository.get(id, menuId);
+        return checkNotFoundWithId(dishRepository.get(id, menuId), id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int menuId, @PathVariable int id) {
-        dishRepository.delete(id, menuId);
+        checkNotFoundWithId(dishRepository.delete(id, menuId), id);
     }
 
     @GetMapping
@@ -44,11 +46,13 @@ public class DishController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody Dish dish, @PathVariable int menuId, @PathVariable int id) {
-        dishRepository.save(dish, menuId);
+        assureIdConsistent(dish, id);
+        checkNotFound(dishRepository.save(dish, menuId), "id " + id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Dish> createWithLocation(@RequestBody Dish dish, @PathVariable int menuId) {
+        checkNew(dish);
         Dish created = dishRepository.save(dish, menuId);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
