@@ -34,6 +34,7 @@ public class Menu extends AbstractBaseEntity {
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
+    @JsonIgnore
     private Restaurant restaurant;
 
     public Menu() {

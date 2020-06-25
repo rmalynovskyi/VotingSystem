@@ -15,4 +15,6 @@ public interface MenuRepository {
     Menu getWithDishes(int id, int restaurantId);
 
     List<Menu> getAll(int restaurantId);
+
+    List<Menu> getAllWithDishes(int restaurantId);
 }

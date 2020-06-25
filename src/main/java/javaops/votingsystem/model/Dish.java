@@ -27,6 +27,7 @@ public class Dish extends AbstractBaseEntity {
     @JoinColumn(name = "menu_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
+    @JsonIgnore
     private Menu menu;
 
     public Dish() {

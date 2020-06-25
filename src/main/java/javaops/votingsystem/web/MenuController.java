@@ -30,9 +30,21 @@ public class MenuController {
         return menuRepository.get(id, restaurantId);
     }
 
+    @GetMapping("/{id}/withDishes")
+    public Menu getWithDishes(@PathVariable int restaurantId, @PathVariable int id) {
+        log.info("get menu {} with dishes for restaurant {}", id, restaurantId);
+        return menuRepository.getWithDishes(id, restaurantId);
+    }
+
+
     @GetMapping
     public List<Menu> getAll(@PathVariable int restaurantId) {
         return menuRepository.getAll(restaurantId);
+    }
+
+    @GetMapping("/dishes")
+    public List<Menu> getAllWithDishes(@PathVariable int restaurantId) {
+        return menuRepository.getAllWithDishes(restaurantId);
     }
 
     @DeleteMapping("/{id}")

@@ -39,4 +39,10 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
     public List<Restaurant> getAll() {
         return crudRestaurantRepository.findAll();
     }
+
+    @Override
+    public List<Restaurant> getAllWithMenus() {
+        return crudRestaurantRepository.getAllWithMenus();
+    }
+
 }

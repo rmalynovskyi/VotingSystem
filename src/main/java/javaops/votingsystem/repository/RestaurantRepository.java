@@ -15,4 +15,6 @@ public interface RestaurantRepository {
     Restaurant getWithMenus(int id);
 
     List<Restaurant> getAll();
+
+    List<Restaurant> getAllWithMenus();
 }
