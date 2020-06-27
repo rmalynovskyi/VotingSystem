@@ -3,7 +3,7 @@ package javaops.votingsystem.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "restaurants")
@@ -16,7 +16,7 @@ public class Restaurant extends AbstractBaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OrderBy(value = "localDate DESC")
-    private List<Menu> menus;
+    private Set<Menu> menus;
 
     public Restaurant() {
     }
@@ -29,11 +29,11 @@ public class Restaurant extends AbstractBaseEntity {
         this.name = name;
     }
 
-    public List<Menu> getMenus() {
+    public Set<Menu> getMenus() {
         return menus;
     }
 
-    public void setMenus(List<Menu> menus) {
+    public void setMenus(Set<Menu> menus) {
         this.menus = menus;
     }
 

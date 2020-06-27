@@ -7,6 +7,7 @@ import javaops.votingsystem.repository.user.CrudUserRepository;
 import javaops.votingsystem.util.exception.IllegalRequestDataException;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 

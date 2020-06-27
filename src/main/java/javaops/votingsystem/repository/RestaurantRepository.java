@@ -2,6 +2,7 @@ package javaops.votingsystem.repository;
 
 import javaops.votingsystem.model.Restaurant;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RestaurantRepository {
@@ -17,4 +18,6 @@ public interface RestaurantRepository {
     List<Restaurant> getAll();
 
     List<Restaurant> getAllWithMenus();
+
+    List<Restaurant> getAllWithMenuOfDay(LocalDate localDate);
 }

@@ -4,6 +4,7 @@ import javaops.votingsystem.model.Restaurant;
 import javaops.votingsystem.repository.RestaurantRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -44,4 +45,8 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
         return crudRestaurantRepository.getAllWithMenus();
     }
 
+    @Override
+    public List<Restaurant> getAllWithMenuOfDay(LocalDate localDate) {
+        return crudRestaurantRepository.getAllWithMenuOfDay(localDate);
+    }
 }

@@ -45,7 +45,7 @@ public class VoteController {
     public void update(@RequestBody Vote vote, @PathVariable int restaurantId, @PathVariable int id) {
         int userId = SecurityUtil.authUserId();
         assureIdConsistent(vote, id);
-        voteRepository.save(vote, userId, restaurantId);
+        checkNotFound(voteRepository.save(vote, userId, restaurantId), "id " + id);
     }
 
     @PostMapping(value = "/restaurants/{restaurantId}/vote", consumes = MediaType.APPLICATION_JSON_VALUE)

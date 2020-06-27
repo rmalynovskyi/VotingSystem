@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 import static javaops.votingsystem.util.ValidationUtil.*;
@@ -45,6 +46,11 @@ public class RestaurantController {
     @GetMapping("/menus")
     public List<Restaurant> getAllWithMenus() {
         return restaurantRepository.getAllWithMenus();
+    }
+
+    @GetMapping("/by")
+    public List<Restaurant> getAllWithMenuOfDay() {
+        return restaurantRepository.getAllWithMenuOfDay(LocalDate.now());
     }
 
     @DeleteMapping("/{id}")

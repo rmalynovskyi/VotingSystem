@@ -18,11 +18,11 @@ VALUES ('Mafia'),
        ('Murakami');
 
 INSERT INTO menus(localDate, description, restaurant_id)
-VALUES ('2020-06-21', 'Mafia menu', 100000),
+VALUES ('2020-06-27', 'Mafia menu', 100000),
        ('2020-06-20', 'Mafia menu', 100000),
-       ('2020-06-21', 'Pesto Cafe menu', 100001),
+       ('2020-06-27', 'Pesto Cafe menu', 100001),
        ('2020-06-20', 'Pesto Cafe menu', 100001),
-       ('2020-06-21', 'Murakami menu', 100002),
+       ('2020-06-27', 'Murakami menu', 100002),
        ('2020-06-20', 'Murakami menu', 100002);
 
 INSERT INTO dishes(name, price, menu_id)
