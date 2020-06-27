@@ -11,6 +11,7 @@
     <context:component-scan base-package="javaops.votingsystem.repository"/>
     <jpa:repositories base-package="javaops.votingsystem.repository.*"/>
     <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
+
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           p:driverClassName="org.hsqldb.jdbcDriver"
