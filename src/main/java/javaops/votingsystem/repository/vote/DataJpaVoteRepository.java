@@ -7,9 +7,9 @@ import javaops.votingsystem.repository.user.CrudUserRepository;
 import javaops.votingsystem.util.exception.IllegalRequestDataException;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
+
+import static javaops.votingsystem.util.DateTimeUtil.isTimeToChangeVote;
 
 @Repository
 public class DataJpaVoteRepository implements VoteRepository {
@@ -30,9 +30,7 @@ public class DataJpaVoteRepository implements VoteRepository {
             Vote voteDb = get(vote.getId(), userId);
             if (voteDb == null) {
                 return null;
-            } else if (voteDb.getDate().isEqual(vote.getDate()) && LocalTime.now().isBefore(LocalTime.of(11, 00))) {
-                vote.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
-            } else {
+            } else if (!isTimeToChangeVote(vote, voteDb)) {
                 throw new IllegalRequestDataException("Its too late, vote can't be changed!");
             }
         }

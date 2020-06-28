@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.time.LocalDate;
 import java.util.List;
 
 import static javaops.votingsystem.util.ValidationUtil.*;
@@ -33,9 +32,9 @@ public class RestaurantController {
         return checkNotFoundWithId(restaurantRepository.get(id), id);
     }
 
-    @GetMapping("/{id}/with")
-    public Restaurant getWithMenus(@PathVariable int id) {
-        return checkNotFoundWithId(restaurantRepository.getWithMenus(id), id);
+    @GetMapping("/{id}/menutoday")
+    public Restaurant getWithDayMenu(@PathVariable int id) {
+        return checkNotFoundWithId(restaurantRepository.getWithDayMenu(id), id);
     }
 
     @GetMapping
@@ -43,14 +42,9 @@ public class RestaurantController {
         return restaurantRepository.getAll();
     }
 
-    @GetMapping("/menus")
-    public List<Restaurant> getAllWithMenus() {
-        return restaurantRepository.getAllWithMenus();
-    }
-
-    @GetMapping("/by")
+    @GetMapping("/menutoday")
     public List<Restaurant> getAllWithMenuOfDay() {
-        return restaurantRepository.getAllWithMenuOfDay(LocalDate.now());
+        return restaurantRepository.getAllWithDayMenu();
     }
 
     @DeleteMapping("/{id}")

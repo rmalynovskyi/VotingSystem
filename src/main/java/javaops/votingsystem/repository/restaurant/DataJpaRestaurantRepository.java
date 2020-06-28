@@ -31,8 +31,8 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
-    public Restaurant getWithMenus(int id) {
-        return crudRestaurantRepository.getWithMenus(id);
+    public Restaurant getWithDayMenu(int id) {
+        return crudRestaurantRepository.getWithDayMenu(id, LocalDate.now());
     }
 
     @Override
@@ -41,12 +41,7 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
-    public List<Restaurant> getAllWithMenus() {
-        return crudRestaurantRepository.getAllWithMenus();
-    }
-
-    @Override
-    public List<Restaurant> getAllWithMenuOfDay(LocalDate localDate) {
-        return crudRestaurantRepository.getAllWithMenuOfDay(localDate);
+    public List<Restaurant> getAllWithDayMenu() {
+        return crudRestaurantRepository.getAllWithDayMenu(LocalDate.now());
     }
 }
