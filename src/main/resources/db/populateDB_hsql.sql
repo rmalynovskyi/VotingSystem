@@ -44,8 +44,8 @@ VALUES ('User', 'user@yandex.ru', 'password'),
        ('Admin', 'admin@gmail.com', 'admin');
 
 INSERT INTO user_roles (role, user_id)
-VALUES ('USER', 100021),
-       ('ADMIN', 100022);
+VALUES ('ROLE_USER', 100021),
+       ('ROLE_ADMIN', 100022);
 
 INSERT INTO votes (date, user_id, restaurant_id)
 VALUES ('2020-06-21', 100021, 100000),

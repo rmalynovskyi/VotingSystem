@@ -18,7 +18,7 @@ import static javaops.votingsystem.util.ValidationUtil.*;
 @RestController
 @RequestMapping(value = DishController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class DishController {
-    static final String REST_URL = "**/menus/{menuId}/dishes";
+    static final String REST_URL = "rest/admin/**/menus/{menuId}/dishes";
     private final DishRepository dishRepository;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
