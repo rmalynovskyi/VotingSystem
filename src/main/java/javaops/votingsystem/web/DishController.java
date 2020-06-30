@@ -35,11 +35,13 @@ public class DishController {
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int menuId, @PathVariable int id) {
+        log.info("delete dish {} for menu {}", id, menuId);
         checkNotFoundWithId(dishRepository.delete(id, menuId), id);
     }
 
     @GetMapping
     public List<Dish> getAll(@PathVariable int menuId) {
+        log.info("get all dishes for menu {}", menuId);
         return dishRepository.getAll(menuId);
     }
 
@@ -47,12 +49,14 @@ public class DishController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody Dish dish, @PathVariable int menuId, @PathVariable int id) {
         assureIdConsistent(dish, id);
+        log.info("update dish {} for menu {}", id, menuId);
         checkNotFound(dishRepository.save(dish, menuId), "id " + id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Dish> createWithLocation(@RequestBody Dish dish, @PathVariable int menuId) {
         checkNew(dish);
+        log.info("create dish {} for menu {}", dish, menuId);
         Dish created = dishRepository.save(dish, menuId);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")

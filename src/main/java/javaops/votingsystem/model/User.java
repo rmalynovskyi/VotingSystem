@@ -2,15 +2,14 @@ package javaops.votingsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.BatchSize;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
@@ -53,6 +52,19 @@ public class User extends AbstractBaseEntity {
     public User() {
     }
 
+    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
+        this(id, name, email, password, new Date(), EnumSet.of(role, roles));
+    }
+
+    public User(Integer id, String name, String email, String password, Date registered, Collection<Role> roles) {
+        super(id);
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.registered = registered;
+        setRoles(roles);
+    }
+
     public String getName() {
         return name;
     }
@@ -89,8 +101,8 @@ public class User extends AbstractBaseEntity {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
 
     public List<Vote> getVotes() {

@@ -16,40 +16,33 @@ import java.util.List;
 import static javaops.votingsystem.util.ValidationUtil.*;
 
 @RestController
-@RequestMapping(value = RestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class RestaurantController {
+@RequestMapping(value = AdminRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class AdminRestaurantController {
 
     static final String REST_URL = "rest/admin/restaurants";
     private final RestaurantRepository restaurantRepository;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public RestaurantController(RestaurantRepository restaurantRepository) {
+    public AdminRestaurantController(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }
 
     @GetMapping("/{id}")
     public Restaurant get(@PathVariable int id) {
+        log.info("get restaurant {}", id);
         return checkNotFoundWithId(restaurantRepository.get(id), id);
-    }
-
-    @GetMapping("/{id}/menutoday")
-    public Restaurant getWithDayMenu(@PathVariable int id) {
-        return checkNotFoundWithId(restaurantRepository.getWithDayMenu(id), id);
     }
 
     @GetMapping
     public List<Restaurant> getAll() {
+        log.info("get all restaurants");
         return restaurantRepository.getAll();
-    }
-
-    @GetMapping("/menutoday")
-    public List<Restaurant> getAllWithMenuOfDay() {
-        return restaurantRepository.getAllWithDayMenu();
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
+        log.info("delete restaurant {}", id);
         checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
 
@@ -57,12 +50,14 @@ public class RestaurantController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody Restaurant restaurant, @PathVariable int id) {
         assureIdConsistent(restaurant, id);
+        log.info("update restaurant {} with id {}", restaurant, id);
         checkNotFound(restaurantRepository.save(restaurant), "id " + id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Restaurant> createWithLocation(@RequestBody Restaurant restaurant) {
         checkNew(restaurant);
+        log.info("create restaurant {}", restaurant);
         Restaurant created = restaurantRepository.save(restaurant);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")

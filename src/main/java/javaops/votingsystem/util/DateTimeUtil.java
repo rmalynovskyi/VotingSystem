@@ -9,6 +9,6 @@ public class DateTimeUtil {
     }
 
     public static boolean isTimeToChangeVote(Vote vote, Vote voteDb) {
-        return voteDb.getDate().isEqual(vote.getDate()) && LocalTime.now().isBefore(LocalTime.of(23, 0));
+        return voteDb.getDate().isEqual(vote.getDate()) && LocalTime.now().isBefore(LocalTime.of(11, 0));
     }
 }

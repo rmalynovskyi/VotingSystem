@@ -18,12 +18,12 @@ VALUES ('Mafia'),
        ('Murakami');
 
 INSERT INTO menus(localDate, description, restaurant_id)
-VALUES ('2020-06-28', 'Mafia menu', 100000),
+VALUES ('2020-06-30', 'Mafia menu', 100000),
        ('2020-06-20', 'Mafia menu', 100000),
-       ('2020-06-28', 'Pesto Cafe menu', 100001),
+       ('2020-06-30', 'Pesto Cafe menu', 100001),
        ('2020-06-20', 'Pesto Cafe menu', 100001),
        ('2020-06-28', 'Murakami menu', 100002),
-       ('2020-06-20', 'Murakami menu', 100002);
+       ('2020-06-30', 'Murakami menu', 100002);
 
 INSERT INTO dishes(name, price, menu_id)
 VALUES ('Double Fila', 199, 100003),
@@ -44,8 +44,8 @@ VALUES ('User', 'user@yandex.ru', 'password'),
        ('Admin', 'admin@gmail.com', 'admin');
 
 INSERT INTO user_roles (role, user_id)
-VALUES ('ROLE_USER', 100021),
-       ('ROLE_ADMIN', 100022);
+VALUES ('USER', 100021),
+       ('ADMIN', 100022);
 
 INSERT INTO votes (date, user_id, restaurant_id)
 VALUES ('2020-06-21', 100021, 100000),

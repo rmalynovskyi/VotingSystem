@@ -42,23 +42,27 @@ public class MenuController {
 
     @GetMapping("/by")
     public Menu getWithDishesByDate(@PathVariable int restaurantId, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate) {
+        log.info("get menu with dishes by date {} for restaurant {}", localDate, restaurantId);
         return checkNotFound(menuRepository.getWithDishesByDate(localDate, restaurantId), "localDate " + localDate);
     }
 
 
     @GetMapping
     public List<Menu> getAll(@PathVariable int restaurantId) {
+        log.info("get all menus for restaurant {}", restaurantId);
         return menuRepository.getAll(restaurantId);
     }
 
     @GetMapping("/dishes")
     public List<Menu> getAllWithDishes(@PathVariable int restaurantId) {
+        log.info("get all menus with dishes for restaurant {}", restaurantId);
         return menuRepository.getAllWithDishes(restaurantId);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int restaurantId, @PathVariable int id) {
+        log.info("delete menu {} for restaurant {}", id, restaurantId);
         checkNotFoundWithId(menuRepository.delete(id, restaurantId), id);
     }
 
@@ -66,12 +70,14 @@ public class MenuController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody Menu menu, @PathVariable int restaurantId, @PathVariable int id) {
         assureIdConsistent(menu, id);
+        log.info("update menu {} for restaurant {}", id, restaurantId);
         checkNotFound(menuRepository.save(menu, restaurantId), "id " + id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Menu> createWithLocation(@RequestBody Menu menu, @PathVariable int restaurantId) {
         checkNew(menu);
+        log.info("create menu {} for restaurant {}", menu, restaurantId);
         Menu created = menuRepository.save(menu, restaurantId);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")

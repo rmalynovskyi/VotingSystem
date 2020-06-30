@@ -15,7 +15,6 @@ public class Restaurant extends AbstractBaseEntity {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    @OrderBy(value = "localDate DESC")
     private Set<Menu> menus;
 
     public Restaurant() {
