@@ -1,4 +1,4 @@
-package javaops.votingsystem.web;
+package javaops.votingsystem.web.user;
 
 import javaops.votingsystem.AuthorizedUser;
 import javaops.votingsystem.model.User;
@@ -13,6 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 import static javaops.votingsystem.util.UserUtil.createNewFromTo;
@@ -45,7 +46,7 @@ public class ProfileUserController {
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public ResponseEntity<User> register(@RequestBody UserTo userTo) {
+    public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo) {
         checkNew(userTo);
         log.info("registration of new user {}", userTo);
         User created = userRepository.save(createNewFromTo(userTo));
@@ -56,7 +57,7 @@ public class ProfileUserController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody UserTo userTo, @AuthenticationPrincipal AuthorizedUser authUser) {
+    public void update(@Valid @RequestBody UserTo userTo, @AuthenticationPrincipal AuthorizedUser authUser) {
         assureIdConsistent(userTo, authUser.getId());
         log.info("update user {} with {}", authUser, userTo);
         User user = get(authUser);

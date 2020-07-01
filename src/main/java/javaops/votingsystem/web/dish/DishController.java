@@ -1,4 +1,4 @@
-package javaops.votingsystem.web;
+package javaops.votingsystem.web.dish;
 
 import javaops.votingsystem.model.Dish;
 import javaops.votingsystem.repository.DishRepository;
@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -47,14 +48,14 @@ public class DishController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Dish dish, @PathVariable int menuId, @PathVariable int id) {
+    public void update(@Valid @RequestBody Dish dish, @PathVariable int menuId, @PathVariable int id) {
         assureIdConsistent(dish, id);
         log.info("update dish {} for menu {}", id, menuId);
         checkNotFound(dishRepository.save(dish, menuId), "id " + id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> createWithLocation(@RequestBody Dish dish, @PathVariable int menuId) {
+    public ResponseEntity<Dish> createWithLocation(@Valid @RequestBody Dish dish, @PathVariable int menuId) {
         checkNew(dish);
         log.info("create dish {} for menu {}", dish, menuId);
         Dish created = dishRepository.save(dish, menuId);

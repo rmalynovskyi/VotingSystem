@@ -1,4 +1,4 @@
-package javaops.votingsystem.web;
+package javaops.votingsystem.web.vote;
 
 import javaops.votingsystem.AuthorizedUser;
 import javaops.votingsystem.model.Vote;
@@ -12,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class ProfileVoteController {
 
     @PutMapping(value = "/restaurants/{restaurantId}/vote/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Vote vote, @PathVariable int restaurantId, @PathVariable int id,
+    public void update(@Valid @RequestBody Vote vote, @PathVariable int restaurantId, @PathVariable int id,
                        @AuthenticationPrincipal AuthorizedUser authorizedUser) {
         assureIdConsistent(vote, id);
         log.info("update vote {} for restaurant {}", id, restaurantId);
@@ -51,7 +52,7 @@ public class ProfileVoteController {
     }
 
     @PostMapping(value = "/restaurants/{restaurantId}/vote", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Vote> createWithLocation(@RequestBody Vote vote, @PathVariable int restaurantId,
+    public ResponseEntity<Vote> createWithLocation(@Valid @RequestBody Vote vote, @PathVariable int restaurantId,
                                                    @AuthenticationPrincipal AuthorizedUser authorizedUser) {
         checkNew(vote);
         log.info("create new vote {} for restaurant {} by user {}", vote, restaurantId, authorizedUser);

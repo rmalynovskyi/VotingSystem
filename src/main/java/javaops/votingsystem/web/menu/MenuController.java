@@ -1,4 +1,4 @@
-package javaops.votingsystem.web;
+package javaops.votingsystem.web.menu;
 
 import javaops.votingsystem.model.Menu;
 import javaops.votingsystem.repository.MenuRepository;
@@ -8,9 +8,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
@@ -68,15 +70,16 @@ public class MenuController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Menu menu, @PathVariable int restaurantId, @PathVariable int id) {
+    public void update(@Valid @RequestBody Menu menu, @PathVariable int restaurantId, @PathVariable int id) {
         assureIdConsistent(menu, id);
         log.info("update menu {} for restaurant {}", id, restaurantId);
         checkNotFound(menuRepository.save(menu, restaurantId), "id " + id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Menu> createWithLocation(@RequestBody Menu menu, @PathVariable int restaurantId) {
+    public ResponseEntity<Menu> createWithLocation(@Valid @RequestBody Menu menu, @PathVariable int restaurantId, BindingResult bindingResult) {
         checkNew(menu);
+        //log.info(bindingResult.getFieldError().getField());
         log.info("create menu {} for restaurant {}", menu, restaurantId);
         Menu created = menuRepository.save(menu, restaurantId);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()

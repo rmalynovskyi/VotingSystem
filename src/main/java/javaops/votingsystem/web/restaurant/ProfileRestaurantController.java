@@ -1,4 +1,4 @@
-package javaops.votingsystem.web;
+package javaops.votingsystem.web.restaurant;
 
 import javaops.votingsystem.model.Restaurant;
 import javaops.votingsystem.repository.RestaurantRepository;
