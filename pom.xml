@@ -39,6 +39,7 @@
         <jackson-json.version>2.10.3</jackson-json.version>
         <spring.security.version>5.3.1.RELEASE</spring.security.version>
         <ehcache.version>3.8.1</ehcache.version>
+        <tomcat.version>9.0.31</tomcat.version>
     </properties>
 
     <dependencies>
@@ -111,6 +112,14 @@
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>2.5.0</version>
+        </dependency>
+
+     <!-- Connection pool -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
+            <version>${tomcat.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Web -->
