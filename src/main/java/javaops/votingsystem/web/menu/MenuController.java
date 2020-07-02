@@ -4,7 +4,6 @@ import javaops.votingsystem.model.Menu;
 import javaops.votingsystem.repository.MenuRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -42,10 +41,10 @@ public class MenuController {
         return checkNotFoundWithId(menuRepository.getWithDishes(id, restaurantId), id);
     }
 
-    @GetMapping("/by")
-    public Menu getWithDishesByDate(@PathVariable int restaurantId, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate) {
-        log.info("get menu with dishes by date {} for restaurant {}", localDate, restaurantId);
-        return checkNotFound(menuRepository.getWithDishesByDate(localDate, restaurantId), "localDate " + localDate);
+    @GetMapping("/today")
+    public Menu getWithDishesForToday(@PathVariable int restaurantId) {
+        log.info("get menu with dishes for today in restaurant {}", restaurantId);
+        return checkNotFound(menuRepository.getWithDishesForToday(restaurantId), "localDate " + LocalDate.now());
     }
 
 

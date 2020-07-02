@@ -1,6 +1,7 @@
 package javaops.votingsystem.web;
 
 import javaops.votingsystem.util.exception.IllegalRequestDataException;
+import javaops.votingsystem.util.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,6 +27,12 @@ public class ExceptionInfoHandler {
     @ResponseStatus(value = HttpStatus.CONFLICT)
     @ExceptionHandler(DataIntegrityViolationException.class)
     protected void conflict(DataIntegrityViolationException e) {
+        log.error(e.getMessage());
+    }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    protected void notFound(DataIntegrityViolationException e) {
         log.error(e.getMessage());
     }
 }

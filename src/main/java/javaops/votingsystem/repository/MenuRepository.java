@@ -15,7 +15,7 @@ public interface MenuRepository {
 
     Menu getWithDishes(int id, int restaurantId);
 
-    Menu getWithDishesByDate(LocalDate localDate, int restaurantId);
+    Menu getWithDishesForToday(int restaurantId);
 
     List<Menu> getAll(int restaurantId);
 
