@@ -40,6 +40,8 @@
         <spring.security.version>5.3.1.RELEASE</spring.security.version>
         <ehcache.version>3.8.1</ehcache.version>
         <tomcat.version>9.0.31</tomcat.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <spring-test.version>5.2.7.RELEASE</spring-test.version>
     </properties>
 
     <dependencies>
@@ -58,13 +60,26 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring-test.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -114,7 +129,7 @@
             <version>2.5.0</version>
         </dependency>
 
-     <!-- Connection pool -->
+        <!-- Connection pool -->
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jdbc</artifactId>

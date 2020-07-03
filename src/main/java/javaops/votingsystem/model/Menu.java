@@ -40,6 +40,17 @@ public class Menu extends AbstractBaseEntity {
     public Menu() {
     }
 
+    public Menu(Integer id, LocalDate localDate, String description) {
+        super(id);
+        this.localDate = localDate;
+        this.description = description;
+    }
+
+    public Menu(Integer id, LocalDate localDate, String description, Set<Dish> dishes) {
+        this(id, localDate, description);
+        this.dishes = dishes;
+    }
+
     public LocalDate getLocalDate() {
         return localDate;
     }
