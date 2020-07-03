@@ -1,7 +1,6 @@
 package javaops.votingsystem.to;
 
 import javaops.votingsystem.HasIdAndEmail;
-import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.Email;
@@ -14,13 +13,11 @@ public class UserTo extends BaseTo implements HasIdAndEmail, Serializable {
 
     @NotBlank
     @Size(min = 2, max = 100)
-    @SafeHtml
     private String name;
 
     @Email
     @NotBlank
     @Size(max = 100)
-    @SafeHtml
     private String email;
 
     @NotBlank

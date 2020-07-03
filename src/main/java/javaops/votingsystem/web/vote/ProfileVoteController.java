@@ -47,7 +47,7 @@ public class ProfileVoteController {
     public void update(@Valid @RequestBody Vote vote, @PathVariable int restaurantId, @PathVariable int id,
                        @AuthenticationPrincipal AuthorizedUser authorizedUser) {
         assureIdConsistent(vote, id);
-        log.info("update vote {} for restaurant {}", id, restaurantId);
+        log.info("update vote {} for restaurant {} by user {}", id, restaurantId, authorizedUser);
         checkNotFoundWithId(voteRepository.save(vote, authorizedUser.getId(), restaurantId), id);
     }
 

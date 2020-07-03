@@ -2,11 +2,13 @@ package javaops.votingsystem.web.user;
 
 import javaops.votingsystem.model.User;
 import javaops.votingsystem.repository.UserRepository;
+import javaops.votingsystem.to.UserTo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,6 +16,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+import static javaops.votingsystem.util.UserUtil.*;
 import static javaops.votingsystem.util.ValidationUtil.*;
 
 @RestController
@@ -22,9 +25,11 @@ public class AdminUserController {
     static final String REST_URL = "rest/admin/users";
     private final UserRepository userRepository;
     private final Logger log = LoggerFactory.getLogger(getClass());
+    private final PasswordEncoder passwordEncoder;
 
-    public AdminUserController(UserRepository userRepository) {
+    public AdminUserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -40,10 +45,11 @@ public class AdminUserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> createWithLocation(@Valid @RequestBody User user) {
-        checkNew(user);
-        log.info("create user {}", user);
-        User created = userRepository.save(user);
+    public ResponseEntity<User> createWithLocation(@Valid @RequestBody UserTo userTo) {
+        checkNew(userTo);
+        log.info("create user {}", userTo);
+        User user = createNewFromTo(userTo);
+        User created = userRepository.save(prepareToSave(user, passwordEncoder));
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
@@ -59,10 +65,11 @@ public class AdminUserController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@Valid @RequestBody User user, @PathVariable int id) {
-        assureIdConsistent(user, id);
-        log.info("update user {} with id {}", user, id);
-        checkNotFound(userRepository.save(user), "id " + id);
+    public void update(@Valid @RequestBody UserTo userTo, @PathVariable int id) {
+        assureIdConsistent(userTo, id);
+        User user = updateFromTo(get(id), userTo);
+        log.info("update user {} with id {}", userTo, id);
+        checkNotFound(userRepository.save(prepareToSave(user, passwordEncoder)), "id " + id);
     }
 
     @GetMapping("/by")

@@ -10,14 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
 
-import static javaops.votingsystem.util.UserUtil.createNewFromTo;
-import static javaops.votingsystem.util.UserUtil.updateFromTo;
+import static javaops.votingsystem.util.UserUtil.*;
 import static javaops.votingsystem.util.ValidationUtil.*;
 
 @RestController
@@ -25,10 +25,12 @@ import static javaops.votingsystem.util.ValidationUtil.*;
 public class ProfileUserController {
     static final String REST_URL = "rest/profile";
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public ProfileUserController(UserRepository userRepository) {
+    public ProfileUserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -49,7 +51,8 @@ public class ProfileUserController {
     public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo) {
         checkNew(userTo);
         log.info("registration of new user {}", userTo);
-        User created = userRepository.save(createNewFromTo(userTo));
+        User user = createNewFromTo(userTo);
+        User created = userRepository.save(prepareToSave(user, passwordEncoder));
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL).build().toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
@@ -60,7 +63,7 @@ public class ProfileUserController {
     public void update(@Valid @RequestBody UserTo userTo, @AuthenticationPrincipal AuthorizedUser authUser) {
         assureIdConsistent(userTo, authUser.getId());
         log.info("update user {} with {}", authUser, userTo);
-        User user = get(authUser);
-        checkNotFoundWithId(userRepository.save(updateFromTo(user, userTo)), authUser.getId());
+        User user = updateFromTo(get(authUser), userTo);
+        checkNotFoundWithId(userRepository.save(prepareToSave(user, passwordEncoder)), authUser.getId());
     }
 }
