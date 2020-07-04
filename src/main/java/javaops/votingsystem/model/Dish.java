@@ -66,9 +66,9 @@ public class Dish extends AbstractBaseEntity {
     @Override
     public String toString() {
         return "Dish{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", price=" + price +
+                ", id=" + id +
                 '}';
     }
 }

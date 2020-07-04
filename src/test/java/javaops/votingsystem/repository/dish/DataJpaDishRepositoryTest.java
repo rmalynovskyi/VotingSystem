@@ -1,24 +1,18 @@
 package javaops.votingsystem.repository.dish;
 
 import javaops.votingsystem.model.Dish;
+import javaops.votingsystem.repository.AbstractRepositoryTest;
 import javaops.votingsystem.repository.DishRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
 
 import static javaops.votingsystem.repository.DishTestData.*;
 import static javaops.votingsystem.repository.MenuTestData.MENU1_ID;
+import static org.junit.jupiter.api.Assertions.*;
 
-
-@SpringJUnitConfig(locations = "classpath:spring/spring-db.xml")
-@Sql(scripts = "classpath:db/populateDB_hsql.sql", config = @SqlConfig(encoding = "UTF-8"))
-class DataJpaDishRepositoryTest {
-
+class DataJpaDishRepositoryTest extends AbstractRepositoryTest {
     @Autowired
     private DishRepository dishRepository;
 
@@ -28,53 +22,53 @@ class DataJpaDishRepositoryTest {
         Dish created = dishRepository.save(newDish, MENU1_ID);
         int newId = created.id();
         newDish.setId(newId);
-        Assertions.assertEquals(newDish, created);
-        Assertions.assertEquals(newDish, dishRepository.get(newId, MENU1_ID));
+        assertMatch(created, newDish);
+        assertMatch(dishRepository.get(newId, MENU1_ID), newDish);
     }
 
     @Test
     void update() {
         Dish updated = getUpdated();
         dishRepository.save(updated, MENU1_ID);
-        Assertions.assertEquals(updated, dishRepository.get(DISH1_ID, MENU1_ID));
+        assertMatch(dishRepository.get(DISH1_ID, MENU1_ID), updated);
     }
 
     @Test
     void updateNotFound() {
         Dish updated = getUpdated();
-        Assertions.assertNull(dishRepository.save(updated, MENU1_ID + 5));
+        assertNull(dishRepository.save(updated, MENU1_ID + 5));
     }
 
     @Test
     void delete() {
         dishRepository.delete(DISH1_ID + 3, MENU1_ID + 1);
-        Assertions.assertNull(dishRepository.get(DISH1_ID + 3, MENU1_ID + 1));
+        assertNull(dishRepository.get(DISH1_ID + 3, MENU1_ID + 1));
     }
 
     @Test
     void deleteNotFound() {
-        Assertions.assertFalse(dishRepository.delete(1, MENU1_ID));
+        assertFalse(dishRepository.delete(1, MENU1_ID));
     }
 
     @Test
     void deleteNotOwn() {
-        Assertions.assertFalse(dishRepository.delete(DISH1_ID + 1, MENU1_ID + 5));
+        assertFalse(dishRepository.delete(DISH1_ID + 1, MENU1_ID + 5));
     }
 
     @Test
     void get() {
         Dish actual = dishRepository.get(DISH1_ID, MENU1_ID);
-        Assertions.assertEquals(DISH1, actual);
+        assertMatch(actual, DISH1);
     }
 
     @Test
     void getNotOwn() {
-        Assertions.assertNull(dishRepository.get(DISH1_ID + 3, MENU1_ID + 4));
+        assertNull(dishRepository.get(DISH1_ID + 3, MENU1_ID + 4));
     }
 
     @Test
     void getAll() {
         List<Dish> dishList = dishRepository.getAll(MENU1_ID + 1);
-        Assertions.assertArrayEquals(DISHES_MENU2.toArray(), dishList.toArray());
+        assertMatch(dishList, DISHES_MENU2);
     }
 }

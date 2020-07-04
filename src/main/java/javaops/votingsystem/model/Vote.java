@@ -25,10 +25,20 @@ public class Vote extends AbstractBaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     // @NotNull
     private Restaurant restaurant;
 
     public Vote() {
+    }
+
+    public Vote(Integer id, LocalDate date) {
+        super(id);
+        this.date = date;
+    }
+
+    public Vote(Vote v) {
+        this(v.getId(), v.getDate());
     }
 
     public LocalDate getDate() {
@@ -59,8 +69,7 @@ public class Vote extends AbstractBaseEntity {
     public String toString() {
         return "Vote{" +
                 "date=" + date +
-                ", user=" + user +
-                ", restaurant=" + restaurant +
+                ", id=" + id +
                 '}';
     }
 }

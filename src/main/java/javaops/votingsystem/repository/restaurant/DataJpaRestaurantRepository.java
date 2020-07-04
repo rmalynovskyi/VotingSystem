@@ -20,6 +20,9 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
     @CacheEvict(value = {"restaurant", "restaurants"}, allEntries = true)
     @Override
     public Restaurant save(Restaurant restaurant) {
+        if (!restaurant.isNew() && get(restaurant.getId()) == null) {
+            return null;
+        }
         return crudRestaurantRepository.save(restaurant);
     }
 

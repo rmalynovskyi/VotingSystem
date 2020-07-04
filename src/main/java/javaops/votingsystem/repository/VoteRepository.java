@@ -11,5 +11,4 @@ public interface VoteRepository {
     Vote get(int id, int userId);
 
     List<Vote> getAll(int userId);
-
 }

@@ -69,6 +69,10 @@ public class User extends AbstractBaseEntity {
         setRoles(roles);
     }
 
+    public User(User u) {
+        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getRegistered(), u.getRoles());
+    }
+
     public String getName() {
         return name;
     }
@@ -125,7 +129,7 @@ public class User extends AbstractBaseEntity {
                 ", password='" + password + '\'' +
                 ", registered=" + registered +
                 ", roles=" + roles +
-                ", votes=" + votes +
+                ", id=" + id +
                 '}';
     }
 }

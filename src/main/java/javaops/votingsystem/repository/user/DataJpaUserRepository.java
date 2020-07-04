@@ -22,6 +22,9 @@ public class DataJpaUserRepository implements UserRepository {
     @CacheEvict(value = "users", allEntries = true)
     @Override
     public User save(User user) {
+        if (!user.isNew() && get(user.getId()) == null) {
+            return null;
+        }
         return crudUserRepository.save(user);
     }
 
@@ -47,8 +50,4 @@ public class DataJpaUserRepository implements UserRepository {
         return crudUserRepository.findAll(SORT_NAME_EMAIL);
     }
 
-    @Override
-    public User getWithVotes(int id) {
-        return crudUserRepository.getWithVotes(id);
-    }
 }
