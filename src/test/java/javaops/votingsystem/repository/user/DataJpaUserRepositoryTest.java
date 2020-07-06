@@ -21,15 +21,15 @@ class DataJpaUserRepositoryTest extends AbstractRepositoryTest {
         User created = userRepository.save(new User(newUser));
         int newId = created.id();
         newUser.setId(newId);
-        assertMatch(created, newUser);
-        assertMatch(userRepository.get(newId), newUser);
+        USER_MATCHER.assertMatch(created, newUser);
+        USER_MATCHER.assertMatch(userRepository.get(newId), newUser);
     }
 
     @Test
     void update() {
         User updated = getUpdated();
         userRepository.save(new User(updated));
-        assertMatch(userRepository.get(USER_ID), updated);
+        USER_MATCHER.assertMatch(userRepository.get(USER_ID), updated);
     }
 
     @Test
@@ -52,7 +52,7 @@ class DataJpaUserRepositoryTest extends AbstractRepositoryTest {
     @Test
     void get() {
         User user = userRepository.get(ADMIN_ID);
-        assertMatch(user, ADMIN);
+        USER_MATCHER.assertMatch(user, ADMIN);
     }
 
     @Test
@@ -63,12 +63,12 @@ class DataJpaUserRepositoryTest extends AbstractRepositoryTest {
     @Test
     void getByEmail() {
         User user = userRepository.getByEmail("admin@gmail.com");
-        assertMatch(user, ADMIN);
+        USER_MATCHER.assertMatch(user, ADMIN);
     }
 
     @Test
     void getAll() {
         List<User> all = userRepository.getAll();
-        assertMatch(all, USERS);
+        USER_MATCHER.assertMatch(all, USERS);
     }
 }

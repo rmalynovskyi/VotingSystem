@@ -23,14 +23,14 @@ class DataJpaVoteRepositoryTest extends AbstractRepositoryTest {
         Vote created = voteRepository.save(newVote, USER_ID, RESTAURANT1_ID);
         int newId = created.id();
         newVote.setId(newId);
-        assertMatch(created, newVote);
-        assertMatch(voteRepository.get(newId, USER_ID), newVote);
+        VOTE_MATCHER.assertMatch(created, newVote);
+        VOTE_MATCHER.assertMatch(voteRepository.get(newId, USER_ID), newVote);
     }
 
     @Test
     void get() {
         Vote actual = voteRepository.get(VOTE1_ID, USER_ID);
-        assertMatch(actual, VOTE1);
+        VOTE_MATCHER.assertMatch(actual, VOTE1);
     }
 
     @Test
@@ -41,6 +41,6 @@ class DataJpaVoteRepositoryTest extends AbstractRepositoryTest {
     @Test
     void getAll() {
         List<Vote> votes = voteRepository.getAll(USER_ID);
-        assertMatch(votes, VOTES_OF_USER);
+        VOTE_MATCHER.assertMatch(votes, VOTES_OF_USER);
     }
 }

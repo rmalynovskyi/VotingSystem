@@ -22,15 +22,15 @@ class DataJpaDishRepositoryTest extends AbstractRepositoryTest {
         Dish created = dishRepository.save(newDish, MENU1_ID);
         int newId = created.id();
         newDish.setId(newId);
-        assertMatch(created, newDish);
-        assertMatch(dishRepository.get(newId, MENU1_ID), newDish);
+        DISH_MATCHER.assertMatch(created, newDish);
+        DISH_MATCHER.assertMatch(dishRepository.get(newId, MENU1_ID), newDish);
     }
 
     @Test
     void update() {
         Dish updated = getUpdated();
         dishRepository.save(updated, MENU1_ID);
-        assertMatch(dishRepository.get(DISH1_ID, MENU1_ID), updated);
+        DISH_MATCHER.assertMatch(dishRepository.get(DISH1_ID, MENU1_ID), updated);
     }
 
     @Test
@@ -58,7 +58,7 @@ class DataJpaDishRepositoryTest extends AbstractRepositoryTest {
     @Test
     void get() {
         Dish actual = dishRepository.get(DISH1_ID, MENU1_ID);
-        assertMatch(actual, DISH1);
+        DISH_MATCHER.assertMatch(actual, DISH1);
     }
 
     @Test
@@ -69,6 +69,6 @@ class DataJpaDishRepositoryTest extends AbstractRepositoryTest {
     @Test
     void getAll() {
         List<Dish> dishList = dishRepository.getAll(MENU1_ID + 1);
-        assertMatch(dishList, DISHES_MENU2);
+        DISH_MATCHER.assertMatch(dishList, DISHES_MENU2);
     }
 }

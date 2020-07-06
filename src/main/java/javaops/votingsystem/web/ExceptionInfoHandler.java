@@ -19,7 +19,7 @@ public class ExceptionInfoHandler {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class, IllegalRequestDataException.class})
+    @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class, IllegalRequestDataException.class, NotFoundException.class})
     protected void handleValidationError(Exception e) {
         log.error(e.getMessage());
     }
@@ -27,12 +27,6 @@ public class ExceptionInfoHandler {
     @ResponseStatus(value = HttpStatus.CONFLICT)
     @ExceptionHandler(DataIntegrityViolationException.class)
     protected void conflict(DataIntegrityViolationException e) {
-        log.error(e.getMessage());
-    }
-
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundException.class)
-    protected void notFound(DataIntegrityViolationException e) {
         log.error(e.getMessage());
     }
 }

@@ -22,7 +22,7 @@ import static javaops.votingsystem.util.ValidationUtil.*;
 @RestController
 @RequestMapping(value = AdminUserController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminUserController {
-    static final String REST_URL = "rest/admin/users";
+    static final String REST_URL = "/rest/admin/users";
     private final UserRepository userRepository;
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final PasswordEncoder passwordEncoder;

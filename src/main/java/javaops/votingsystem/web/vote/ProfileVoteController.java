@@ -22,7 +22,7 @@ import static javaops.votingsystem.util.ValidationUtil.*;
 @RequestMapping(value = ProfileVoteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfileVoteController {
 
-    static final String REST_URL = "rest/profile/votes";
+    static final String REST_URL = "/rest/profile/votes";
     private final VoteRepository voteRepository;
     private final Logger log = LoggerFactory.getLogger(getClass());
 

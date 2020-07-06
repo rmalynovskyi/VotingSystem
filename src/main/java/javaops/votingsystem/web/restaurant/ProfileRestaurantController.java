@@ -17,7 +17,7 @@ import static javaops.votingsystem.util.ValidationUtil.checkNotFoundWithId;
 @RestController
 @RequestMapping(value = ProfileRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfileRestaurantController {
-    static final String REST_URL = "rest/profile/restaurants";
+    static final String REST_URL = "/rest/profile/restaurants";
     private final RestaurantRepository restaurantRepository;
     private final Logger log = LoggerFactory.getLogger(getClass());
 

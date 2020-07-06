@@ -1,14 +1,15 @@
 package javaops.votingsystem.repository;
 
+import javaops.votingsystem.TestMatcher;
 import javaops.votingsystem.model.Dish;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static javaops.votingsystem.model.AbstractBaseEntity.START_SEQ;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class DishTestData {
+    public static TestMatcher<Dish> DISH_MATCHER = TestMatcher.usingFieldsComparator(Dish.class, "menu");
     public static final int DISH1_ID = START_SEQ + 9;
     public static final Dish DISH1 = new Dish(DISH1_ID, "Double Fila", 199);
     public static final Dish DISH2 = new Dish(DISH1_ID + 1, "Super Fila XL", 299);
@@ -30,13 +31,5 @@ public class DishTestData {
 
     public static Dish getUpdated() {
         return new Dish(DISH1_ID, "Updated", 77);
-    }
-
-    public static void assertMatch(Dish actual, Dish expected) {
-        assertThat(actual).isEqualToIgnoringGivenFields(expected, "menu");
-    }
-
-    public static void assertMatch(Iterable<Dish> actual, Iterable<Dish> expected) {
-        assertThat(actual).usingElementComparatorIgnoringFields("menu").isEqualTo(expected);
     }
 }

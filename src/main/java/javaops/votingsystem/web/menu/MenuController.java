@@ -21,7 +21,7 @@ import static javaops.votingsystem.util.ValidationUtil.*;
 @RestController
 @RequestMapping(value = MenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class MenuController {
-    static final String REST_URL = "rest/admin/restaurants/{restaurantId}/menus";
+    static final String REST_URL = "/rest/admin/restaurants/{restaurantId}/menus";
     private final MenuRepository menuRepository;
     private final Logger log = LoggerFactory.getLogger(getClass());
 

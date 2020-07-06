@@ -2,7 +2,6 @@ package javaops.votingsystem.repository.restaurant;
 
 import javaops.votingsystem.model.Restaurant;
 import javaops.votingsystem.repository.AbstractRepositoryTest;
-import javaops.votingsystem.repository.MenuTestData;
 import javaops.votingsystem.repository.RestaurantRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static javaops.votingsystem.repository.MenuTestData.MENU1;
+import static javaops.votingsystem.repository.MenuTestData.MENU_MATCHER;
 import static javaops.votingsystem.repository.RestaurantTestData.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,15 +24,15 @@ class DataJpaRestaurantRepositoryTest extends AbstractRepositoryTest {
         Restaurant created = restaurantRepository.save(newRestaurant);
         int newId = created.id();
         newRestaurant.setId(newId);
-        assertMatch(created, newRestaurant);
-        assertMatch(restaurantRepository.get(newId), newRestaurant);
+        RESTAURANT_MATCHER.assertMatch(created, newRestaurant);
+        RESTAURANT_MATCHER.assertMatch(restaurantRepository.get(newId), newRestaurant);
     }
 
     @Test
     void update() {
         Restaurant updated = getUpdated();
         restaurantRepository.save(updated);
-        assertMatch(restaurantRepository.get(RESTAURANT1_ID), updated);
+        RESTAURANT_MATCHER.assertMatch(restaurantRepository.get(RESTAURANT1_ID), updated);
     }
 
     @Test
@@ -55,25 +55,25 @@ class DataJpaRestaurantRepositoryTest extends AbstractRepositoryTest {
     @Test
     void get() {
         Restaurant actual = restaurantRepository.get(RESTAURANT1_ID);
-        assertMatch(actual, RESTAURANT1);
+        RESTAURANT_MATCHER.assertMatch(actual, RESTAURANT1);
     }
 
     @Test
     void getWithDayMenu() {
         Restaurant actual = restaurantRepository.getWithDayMenu(RESTAURANT1_ID);
-        assertMatch(actual, RESTAURANT1);
-        MenuTestData.assertMatch(actual.getMenus(), Collections.singletonList(MENU1));
+        RESTAURANT_MATCHER.assertMatch(actual, RESTAURANT1);
+        MENU_MATCHER.assertMatch(actual.getMenus(), Collections.singletonList(MENU1));
     }
 
     @Test
     void getAllWithDayMenu() {
         List<Restaurant> restaurants = restaurantRepository.getAllWithDayMenu();
-        assertMatch(restaurants, RESTAURANT_WITH_MENU_FOR_TODAY);
+        RESTAURANT_MATCHER.assertMatch(restaurants, RESTAURANT_WITH_MENU_FOR_TODAY);
     }
 
     @Test
     void getAll() {
         List<Restaurant> restaurants = restaurantRepository.getAll();
-        assertMatch(restaurants, RESTAURANTS);
+        RESTAURANT_MATCHER.assertMatch(restaurants, RESTAURANTS);
     }
 }
