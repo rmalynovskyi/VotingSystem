@@ -2,7 +2,6 @@ package javaops.votingsystem.repository;
 
 import javaops.votingsystem.model.Menu;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface MenuRepository {

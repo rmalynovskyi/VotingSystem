@@ -1,6 +1,7 @@
 package javaops.votingsystem;
 
 public interface HasId {
+
     Integer getId();
 
     void setId(Integer id);

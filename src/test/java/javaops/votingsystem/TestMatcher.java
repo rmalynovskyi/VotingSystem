@@ -51,11 +51,7 @@ public class TestMatcher<T> {
         return result -> assertMatch(TestUtil.readFromJsonMvcResult(result, clazz), expected);
     }
 
-    public ResultMatcher contentJson(T... expected) {
-        return contentJson(List.of(expected));
-    }
-
     public ResultMatcher contentJson(Iterable<T> expected) {
         return result -> assertMatch(readListFromJsonMvcResult(result, clazz), expected);
     }
-    }
+}
