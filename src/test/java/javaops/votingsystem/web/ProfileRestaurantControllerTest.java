@@ -1,7 +1,6 @@
-package javaops.votingsystem.web.restaurant;
+package javaops.votingsystem.web;
 
 import javaops.votingsystem.repository.RestaurantRepository;
-import javaops.votingsystem.web.AbstractControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

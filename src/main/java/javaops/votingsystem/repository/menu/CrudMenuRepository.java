@@ -21,13 +21,13 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @Query("SELECT m FROM Menu m left join fetch m.dishes WHERE m.id=:id and m.restaurant.id=:restaurantId")
     Menu getWithDishes(@Param("id") int id, @Param("restaurantId") int restaurantId);
 
-    @Query("SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.localDate DESC")
+    @Query("SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId ORDER BY m.date DESC")
     List<Menu> getAll(@Param("restaurantId") int restaurantId);
 
-    @Query("SELECT distinct m FROM Menu m left join fetch m.dishes WHERE m.restaurant.id=:restaurantId ORDER BY m.localDate DESC")
+    @Query("SELECT distinct m FROM Menu m left join fetch m.dishes WHERE m.restaurant.id=:restaurantId ORDER BY m.date DESC")
     List<Menu> getAllWithDishes(@Param("restaurantId") int restaurantId);
 
-    @Query("SELECT m FROM Menu m left join fetch m.dishes WHERE m.localDate=:localDate and m.restaurant.id=:restaurantId")
+    @Query("SELECT m FROM Menu m left join fetch m.dishes WHERE m.date=:localDate and m.restaurant.id=:restaurantId")
     Menu getMenuWithDishesForToday(@Param("localDate") LocalDate localDate, @Param("restaurantId") int restaurantId);
 
 }

@@ -1,6 +1,7 @@
 package javaops.votingsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javaops.votingsystem.View;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,13 +14,13 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Table(name = "menus", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_Id", "localDate"}, name = "menus_unique_restaurant_date_idx")})
+@Table(name = "menus", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_Id", "date"}, name = "menus_unique_restaurant_date_idx")})
 public class Menu extends AbstractBaseEntity {
 
-    @Column(name = "localDate", nullable = false)
+    @Column(name = "date", nullable = false)
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate localDate;
+    private LocalDate date;
 
     @Column(name = "description", nullable = false)
     @NotBlank
@@ -33,30 +34,30 @@ public class Menu extends AbstractBaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    // @NotNull
+    @NotNull(groups = View.class)
     @JsonIgnore
     private Restaurant restaurant;
 
     public Menu() {
     }
 
-    public Menu(Integer id, LocalDate localDate, String description) {
+    public Menu(Integer id, LocalDate date, String description) {
         super(id);
-        this.localDate = localDate;
+        this.date = date;
         this.description = description;
     }
 
-    public Menu(Integer id, LocalDate localDate, String description, Set<Dish> dishes) {
-        this(id, localDate, description);
+    public Menu(Integer id, LocalDate date, String description, Set<Dish> dishes) {
+        this(id, date, description);
         this.dishes = dishes;
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getDescription() {
@@ -86,7 +87,7 @@ public class Menu extends AbstractBaseEntity {
     @Override
     public String toString() {
         return "Menu{" +
-                "localDate=" + localDate +
+                "date=" + date +
                 ", description='" + description + '\'' +
                 ", id=" + id +
                 '}';

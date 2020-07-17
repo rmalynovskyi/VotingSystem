@@ -1,4 +1,4 @@
-package javaops.votingsystem.web.user;
+package javaops.votingsystem.web;
 
 import javaops.votingsystem.model.User;
 import javaops.votingsystem.repository.UserRepository;

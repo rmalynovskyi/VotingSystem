@@ -1,10 +1,9 @@
-package javaops.votingsystem.web.vote;
+package javaops.votingsystem.web;
 
 import javaops.votingsystem.model.Vote;
 import javaops.votingsystem.repository.VoteRepository;
 import javaops.votingsystem.repository.VoteTestData;
 import javaops.votingsystem.util.JsonUtil;
-import javaops.votingsystem.web.AbstractControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

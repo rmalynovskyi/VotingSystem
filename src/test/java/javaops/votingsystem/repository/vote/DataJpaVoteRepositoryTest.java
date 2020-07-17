@@ -20,7 +20,7 @@ class DataJpaVoteRepositoryTest extends AbstractRepositoryTest {
     @Test
     void save() {
         Vote newVote = getNew();
-        Vote created = voteRepository.save(newVote, USER_ID, RESTAURANT1_ID);
+        Vote created = voteRepository.save(newVote, RESTAURANT1_ID, USER_ID);
         int newId = created.id();
         newVote.setId(newId);
         VOTE_MATCHER.assertMatch(created, newVote);

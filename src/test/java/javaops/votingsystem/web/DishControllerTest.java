@@ -1,10 +1,9 @@
-package javaops.votingsystem.web.dish;
+package javaops.votingsystem.web;
 
 import javaops.votingsystem.model.Dish;
 import javaops.votingsystem.repository.DishRepository;
 import javaops.votingsystem.repository.DishTestData;
 import javaops.votingsystem.util.JsonUtil;
-import javaops.votingsystem.web.AbstractControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

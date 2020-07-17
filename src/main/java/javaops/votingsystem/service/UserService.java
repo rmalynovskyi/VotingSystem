@@ -1,4 +1,4 @@
-package javaops.votingsystem.userservice;
+package javaops.votingsystem.service;
 
 import javaops.votingsystem.AuthorizedUser;
 import javaops.votingsystem.model.User;
@@ -25,5 +25,4 @@ public class UserService implements UserDetailsService {
         }
         return new AuthorizedUser(user);
     }
-
 }

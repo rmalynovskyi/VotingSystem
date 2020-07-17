@@ -19,10 +19,10 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     int delete(@Param("id") int id);
 
     @Query("SELECT r FROM Restaurant r left join fetch r.menus m left join fetch m.dishes " +
-            "where r.id=:id and m.localDate=:localDate order by r.name ASC")
+            "where r.id=:id and m.date=:localDate order by r.name ASC")
     Restaurant getWithDayMenu(@Param("id") int id, @Param("localDate") LocalDate localDate);
 
     @Query("SELECT DISTINCT r FROM Restaurant r left join fetch r.menus m left join fetch m.dishes " +
-            "where m.localDate=:localDate order by r.name ASC")
+            "where m.date=:localDate order by r.name ASC")
     List<Restaurant> getAllWithDayMenu(@Param("localDate") LocalDate localDate);
 }

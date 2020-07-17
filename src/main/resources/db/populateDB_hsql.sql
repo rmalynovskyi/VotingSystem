@@ -17,7 +17,7 @@ VALUES ('Mafia'),
        ('Pesto Cafe'),
        ('Murakami');
 
-INSERT INTO menus(localDate, description, restaurant_id)
+INSERT INTO menus(date, description, restaurant_id)
 VALUES (now(), 'Mafia menu', 100000),
        ('2020-06-20', 'Mafia menu', 100000),
        ('2020-06-30', 'Pesto Cafe menu', 100001),
@@ -47,6 +47,6 @@ INSERT INTO user_roles (role, user_id)
 VALUES ('USER', 100021),
        ('ADMIN', 100022);
 
-INSERT INTO votes (date, user_id, restaurant_id)
+INSERT INTO votes (dateTime, user_id, restaurant_id)
 VALUES ('2020-06-21', 100021, 100000),
        ('2020-06-20', 100021, 100001);

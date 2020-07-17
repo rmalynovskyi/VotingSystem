@@ -1,6 +1,7 @@
 package javaops.votingsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javaops.votingsystem.View;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -26,7 +27,7 @@ public class Dish extends AbstractBaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    //  @NotNull
+    @NotNull(groups = View.class)
     @JsonIgnore
     private Menu menu;
 

@@ -37,6 +37,8 @@
                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).CACHE_REGION_FACTORY}" value="org.hibernate.cache.jcache.internal.JCacheRegionFactory"/>
                 <entry key="#{T(org.hibernate.cache.jcache.ConfigSettings).PROVIDER}" value="org.ehcache.jsr107.EhcacheCachingProvider"/>
                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SECOND_LEVEL_CACHE}" value="true"/>
+                <entry key="javax.persistence.validation.group.pre-persist" value="javaops.votingsystem.View"/>
+                <entry key="javax.persistence.validation.group.pre-update" value="javaops.votingsystem.View"/>
             </map>
         </property>
         <property name="jpaVendorAdapter">
@@ -47,5 +49,4 @@
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
           p:entityManagerFactory-ref="entityManagerFactory"/>
-
 </beans>

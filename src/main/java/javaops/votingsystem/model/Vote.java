@@ -1,5 +1,6 @@
 package javaops.votingsystem.model;
 
+import javaops.votingsystem.View;
 import org.hibernate.annotations.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,10 +11,10 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "date"}, name = "votes_unique_user_date_idx")})
+@Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = "dateTime", name = "votes_unique_date_idx")})
 public class Vote extends AbstractBaseEntity {
 
-    @Column(name = "date", nullable = false, columnDefinition = "timestamp default now()")
+    @Column(name = "dateTime", nullable = false, columnDefinition = "timestamp default now()")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @NotNull
     private LocalDate date = LocalDate.now();
@@ -26,7 +27,7 @@ public class Vote extends AbstractBaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    // @NotNull
+    @NotNull(groups = View.class)
     private Restaurant restaurant;
 
     public Vote() {

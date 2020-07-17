@@ -1,10 +1,9 @@
-package javaops.votingsystem.web.menu;
+package javaops.votingsystem.web;
 
 import javaops.votingsystem.model.Menu;
 import javaops.votingsystem.repository.MenuRepository;
 import javaops.votingsystem.repository.MenuTestData;
 import javaops.votingsystem.util.JsonUtil;
-import javaops.votingsystem.web.AbstractControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

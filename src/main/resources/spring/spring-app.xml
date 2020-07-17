@@ -6,5 +6,5 @@
 
     <import resource="spring-security.xml"/>
     <import resource="spring-cache.xml"/>
-    <context:component-scan base-package="javaops.votingsystem.userservice"/>
+    <context:component-scan base-package="javaops.votingsystem.service"/>
 </beans>

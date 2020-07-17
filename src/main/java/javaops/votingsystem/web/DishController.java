@@ -1,4 +1,4 @@
-package javaops.votingsystem.web.dish;
+package javaops.votingsystem.web;
 
 import javaops.votingsystem.model.Dish;
 import javaops.votingsystem.repository.DishRepository;

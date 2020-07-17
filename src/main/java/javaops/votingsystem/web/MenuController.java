@@ -1,4 +1,4 @@
-package javaops.votingsystem.web.menu;
+package javaops.votingsystem.web;
 
 import javaops.votingsystem.model.Menu;
 import javaops.votingsystem.repository.MenuRepository;
