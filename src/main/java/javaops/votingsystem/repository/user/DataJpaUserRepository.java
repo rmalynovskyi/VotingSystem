@@ -2,8 +2,6 @@ package javaops.votingsystem.repository.user;
 
 import javaops.votingsystem.model.User;
 import javaops.votingsystem.repository.UserRepository;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +17,6 @@ public class DataJpaUserRepository implements UserRepository {
         this.crudUserRepository = crudUserRepository;
     }
 
-    @CacheEvict(value = "users", allEntries = true)
     @Override
     public User save(User user) {
         if (!user.isNew() && get(user.getId()) == null) {
@@ -28,7 +25,6 @@ public class DataJpaUserRepository implements UserRepository {
         return crudUserRepository.save(user);
     }
 
-    @CacheEvict(value = "users", allEntries = true)
     @Override
     public boolean delete(int id) {
         return crudUserRepository.delete(id) != 0;
@@ -44,7 +40,6 @@ public class DataJpaUserRepository implements UserRepository {
         return crudUserRepository.getByEmail(email);
     }
 
-    @Cacheable("users")
     @Override
     public List<User> getAll() {
         return crudUserRepository.findAll(SORT_NAME_EMAIL);
