@@ -5,7 +5,6 @@ import javaops.votingsystem.model.Role;
 import javaops.votingsystem.model.User;
 import javaops.votingsystem.util.JsonUtil;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class UserTestData {
     public static final int ADMIN_ID = START_SEQ + 22;
     public static final User USER = new User(USER_ID, "User", "user@yandex.ru", "password", Role.USER);
     public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ADMIN);
-    public static final List<User> USERS = Arrays.asList(ADMIN, USER);
+    public static final List<User> USERS = List.of(ADMIN, USER);
 
     public static User getNew() {
         return new User(null, "New", "new@gmail.com", "newPass", Role.USER);

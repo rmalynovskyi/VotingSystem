@@ -6,7 +6,7 @@ import javaops.votingsystem.util.exception.IllegalRequestDataException;
 import javaops.votingsystem.util.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
+import java.time.*;
 import java.util.List;
 
 import static javaops.votingsystem.util.ValidationUtil.checkNotFoundWithId;
@@ -15,6 +15,7 @@ import static javaops.votingsystem.util.ValidationUtil.checkNotFoundWithId;
 public class VoteService {
     public static final LocalTime LAST_TIME_TO_VOTE_TODAY = LocalTime.of(11, 0);
     private final VoteRepository voteRepository;
+    private Clock clock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
 
     public VoteService(VoteRepository voteRepository) {
         this.voteRepository = voteRepository;
@@ -29,7 +30,7 @@ public class VoteService {
         if (!vote.isNew() && voteDb == null) {
             throw new NotFoundException("Vote not found!");
         }
-        if (!isDateTimeToChangeVote(vote, voteDb)) {
+        if (!isDateAndTimeToChangeVote(vote, voteDb)) {
             throw new IllegalRequestDataException("Its too late, vote can't be changed!");
         }
         checkNotFoundWithId(voteRepository.save(vote, restaurant, userId), vote.getId());
@@ -43,7 +44,11 @@ public class VoteService {
         return voteRepository.getAll(userId);
     }
 
-    private static boolean isDateTimeToChangeVote(Vote vote, Vote voteDb) {
-        return voteDb.getDate().isEqual(vote.getDate()) && LocalTime.now().isBefore(LAST_TIME_TO_VOTE_TODAY);
+    private boolean isDateAndTimeToChangeVote(Vote vote, Vote voteDb) {
+        return voteDb.getDate().isEqual(vote.getDate()) && LocalTime.now(clock).isBefore(LAST_TIME_TO_VOTE_TODAY);
+    }
+
+    public void setClock(Clock clock) {
+        this.clock = clock;
     }
 }

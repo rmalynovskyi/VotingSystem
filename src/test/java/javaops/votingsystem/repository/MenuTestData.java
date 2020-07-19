@@ -4,7 +4,6 @@ import javaops.votingsystem.TestMatcher;
 import javaops.votingsystem.model.Menu;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 import static javaops.votingsystem.model.AbstractBaseEntity.START_SEQ;
@@ -27,7 +26,7 @@ public class MenuTestData {
         return new Menu(MENU1_ID, LocalDate.of(2020, 7, 4), "Updated menu");
     }
 
-    public static final List<Menu> MENUS_RESTAURANT1 = Arrays.asList(MENU1, MENU2);
-    public static final List<Menu> MENUS_RESTAURANT2 = Arrays.asList(MENU3, MENU4);
-    public static final List<Menu> MENUS_RESTAURANT3 = Arrays.asList(MENU6, MENU5);
+    public static final List<Menu> MENUS_RESTAURANT1 = List.of(MENU1, MENU2);
+    public static final List<Menu> MENUS_RESTAURANT2 = List.of(MENU3, MENU4);
+    public static final List<Menu> MENUS_RESTAURANT3 = List.of(MENU6, MENU5);
 }

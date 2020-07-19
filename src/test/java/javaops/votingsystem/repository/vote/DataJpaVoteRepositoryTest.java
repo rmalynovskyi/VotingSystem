@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import static javaops.votingsystem.repository.RestaurantTestData.RESTAURANT1;
 import static javaops.votingsystem.repository.RestaurantTestData.RESTAURANT1_ID;
 import static javaops.votingsystem.repository.UserTestData.USER_ID;
 import static javaops.votingsystem.repository.VoteTestData.*;
@@ -23,6 +24,7 @@ class DataJpaVoteRepositoryTest extends AbstractRepositoryTest {
         Vote created = voteRepository.save(newVote, RESTAURANT1_ID, USER_ID);
         int newId = created.id();
         newVote.setId(newId);
+        newVote.setRestaurant(RESTAURANT1);
         VOTE_MATCHER.assertMatch(created, newVote);
         VOTE_MATCHER.assertMatch(voteRepository.get(newId, USER_ID), newVote);
     }

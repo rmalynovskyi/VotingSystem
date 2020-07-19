@@ -3,7 +3,6 @@ package javaops.votingsystem.repository;
 import javaops.votingsystem.TestMatcher;
 import javaops.votingsystem.model.Dish;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static javaops.votingsystem.model.AbstractBaseEntity.START_SEQ;
@@ -20,10 +19,10 @@ public class DishTestData {
     public static final Dish DISH7 = new Dish(DISH1_ID + 6, "Potatos free", 120);
     public static final Dish DISH8 = new Dish(DISH1_ID + 7, "Fish file", 290);
 
-    public static final List<Dish> DISHES_MENU1 = Arrays.asList(DISH1, DISH2);
-    public static final List<Dish> DISHES_MENU2 = Arrays.asList(DISH4, DISH3);
-    public static final List<Dish> DISHES_MENU3 = Arrays.asList(DISH5, DISH6);
-    public static final List<Dish> DISHES_MENU4 = Arrays.asList(DISH8, DISH7);
+    public static final List<Dish> DISHES_MENU1 = List.of(DISH1, DISH2);
+    public static final List<Dish> DISHES_MENU2 = List.of(DISH4, DISH3);
+    public static final List<Dish> DISHES_MENU3 = List.of(DISH5, DISH6);
+    public static final List<Dish> DISHES_MENU4 = List.of(DISH8, DISH7);
 
     public static Dish getNew() {
         return new Dish(null, "New Dish", 200);
