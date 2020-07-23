@@ -36,26 +36,25 @@ public class MenuController {
     }
 
     @GetMapping("/{id}/with")
-    public Menu getWithDishes(@PathVariable int restaurantId, @PathVariable int id) {
+    public Menu getWithDishes(@PathVariable int restaurantId, @PathVariable int id, @RequestParam String dishes) {
         log.info("get menu {} with dishes for restaurant {}", id, restaurantId);
         return checkNotFoundWithId(menuRepository.getWithDishes(id, restaurantId), id);
     }
 
     @GetMapping("/today")
-    public Menu getWithDishesForToday(@PathVariable int restaurantId) {
+    public Menu getWithDishesForToday(@PathVariable int restaurantId, @RequestParam String today) {
         log.info("get menu with dishes for today in restaurant {}", restaurantId);
         return checkNotFound(menuRepository.getWithDishesForToday(restaurantId), "localDate " + LocalDate.now());
     }
-
-
+    
     @GetMapping
     public List<Menu> getAll(@PathVariable int restaurantId) {
         log.info("get all menus for restaurant {}", restaurantId);
         return menuRepository.getAll(restaurantId);
     }
 
-    @GetMapping("/dishes")
-    public List<Menu> getAllWithDishes(@PathVariable int restaurantId) {
+    @GetMapping("/with")
+    public List<Menu> getAllWithDishes(@PathVariable int restaurantId, @RequestParam String dishes) {
         log.info("get all menus with dishes for restaurant {}", restaurantId);
         return menuRepository.getAllWithDishes(restaurantId);
     }

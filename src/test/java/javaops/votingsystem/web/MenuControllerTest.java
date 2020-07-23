@@ -38,7 +38,7 @@ class MenuControllerTest extends AbstractControllerTest {
 
     @Test
     void getWithDishes() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL + MENU1_ID + "/with")
+        perform(MockMvcRequestBuilders.get(REST_URL + MENU1_ID + "/with?dishes=")
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -49,7 +49,7 @@ class MenuControllerTest extends AbstractControllerTest {
 
     @Test
     void getWithDishesForToday() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL + "today")
+        perform(MockMvcRequestBuilders.get(REST_URL + "today?today=")
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -70,7 +70,7 @@ class MenuControllerTest extends AbstractControllerTest {
 
     @Test
     void getAllWithDishes() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL + "dishes")
+        perform(MockMvcRequestBuilders.get(REST_URL + "with?dishes=")
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())

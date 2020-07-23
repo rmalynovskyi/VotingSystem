@@ -54,7 +54,7 @@ class ProfileVoteControllerTest extends AbstractControllerTest {
     @Test
     void createWithLocation() throws Exception {
         Vote newVote = VoteTestData.getNew();
-        ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL + "restaurants/100000/vote/")
+        ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL + "?restaurantId=100000")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(USER))
                 .content(JsonUtil.writeValue(newVote)))
@@ -73,7 +73,7 @@ class ProfileVoteControllerTest extends AbstractControllerTest {
         voteService.setClock(Clock.fixed(Instant.parse("2020-06-21T10:00:00Z"), ZoneOffset.UTC));
         Vote updated = new Vote();
         updated.setDate(LocalDate.of(2020, 6, 21));
-        perform(MockMvcRequestBuilders.put(REST_URL + "/restaurants/100001/vote/" + VOTE1_ID).contentType(MediaType.APPLICATION_JSON)
+        perform(MockMvcRequestBuilders.put(REST_URL + VOTE1_ID + "?restaurantId=100001").contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(USER))
                 .content(JsonUtil.writeValue(updated)))
                 .andDo(print())
@@ -86,7 +86,7 @@ class ProfileVoteControllerTest extends AbstractControllerTest {
         voteService.setClock(Clock.fixed(Instant.parse("2020-06-21T12:00:00Z"), ZoneOffset.UTC));
         Vote updated = new Vote();
         updated.setDate(LocalDate.of(2020, 6, 21));
-        perform(MockMvcRequestBuilders.put(REST_URL + "/restaurants/100001/vote/" + VOTE1_ID).contentType(MediaType.APPLICATION_JSON)
+        perform(MockMvcRequestBuilders.put(REST_URL + VOTE1_ID + "?restaurantId=100001").contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(USER))
                 .content(JsonUtil.writeValue(updated)))
                 .andDo(print())

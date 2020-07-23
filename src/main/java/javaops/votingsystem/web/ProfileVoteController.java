@@ -42,17 +42,17 @@ public class ProfileVoteController {
         return voteService.getAll(authorizedUser.getId());
     }
 
-    @PutMapping(value = "/restaurants/{restaurantId}/vote/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@Valid @RequestBody Vote vote, @PathVariable int restaurantId, @PathVariable int id,
+    public void update(@Valid @RequestBody Vote vote, @PathVariable int id, @RequestParam int restaurantId,
                        @AuthenticationPrincipal AuthorizedUser authorizedUser) {
         assureIdConsistent(vote, id);
         log.info("update vote {} for restaurant {} by user {}", id, restaurantId, authorizedUser);
         voteService.update(vote, restaurantId, authorizedUser.getId());
     }
 
-    @PostMapping(value = "/restaurants/{restaurantId}/vote", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Vote> createWithLocation(@Valid @RequestBody Vote vote, @PathVariable int restaurantId,
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Vote> createWithLocation(@Valid @RequestBody Vote vote, @RequestParam int restaurantId,
                                                    @AuthenticationPrincipal AuthorizedUser authorizedUser) {
         checkNew(vote);
         log.info("create new vote {} for restaurant {} by user {}", vote, restaurantId, authorizedUser);
