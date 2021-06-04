@@ -37,7 +37,7 @@
         <spring-data-jpa.version>2.2.6.RELEASE</spring-data-jpa.version>
         <spring.version>5.2.5.RELEASE</spring.version>
         <hibernate.version>5.4.12.Final</hibernate.version>
-        <hibernate-validator.version>6.1.2.Final</hibernate-validator.version>
+        <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
         <spring-webmvc.version>5.2.5.RELEASE</spring-webmvc.version>
         <logback.version>1.2.3</logback.version>
         <slf4j.version>1.7.30</slf4j.version>
