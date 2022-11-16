@@ -41,7 +41,7 @@
         <spring-webmvc.version>5.2.5.RELEASE</spring-webmvc.version>
         <logback.version>1.2.3</logback.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <jackson-json.version>2.10.3</jackson-json.version>
+        <jackson-json.version>2.12.7.1</jackson-json.version>
         <spring.security.version>5.3.1.RELEASE</spring.security.version>
         <ehcache.version>3.8.1</ehcache.version>
         <tomcat.version>9.0.31</tomcat.version>
